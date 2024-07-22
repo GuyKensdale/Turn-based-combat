@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Turn_based_combat
@@ -14,7 +15,8 @@ namespace Turn_based_combat
             int playerHp = 40;
             int pcHp = 40;
 
-            int playerAttack = 5;
+            int playerAttack1 = 5;
+            int playerAttack2 = 6;
             int pcAttack = 4;
 
             int healAmount = 5;
@@ -26,19 +28,32 @@ namespace Turn_based_combat
                 //player turn
                 Console.WriteLine();
                 Console.WriteLine("--Your turn--");
-                Console.WriteLine("Enter 'a' to attack or 'h' to heal.");
+                Console.WriteLine("Enter 'Scratch' to use Scratch attack, 'Heal' to  use Heal, 'Ember' to use Ember");
 
                 string choice = Console.ReadLine();
-                if(choice == "a")
+                if(choice == "Scratch")
                 {
-                    pcHp -= playerAttack;
-                    Console.WriteLine("You hit the enemy for " + playerAttack + "damage!" + "\n");
+                    pcHp -= playerAttack1;
+                    Console.WriteLine("You hit the enemy for " + playerAttack1 + "damage!" + "\n");
+                    Console.WriteLine("The enemy pokemons tottal HP is " + pcHp + "\n");
+                    Console.WriteLine("...");
+                    Thread.Sleep(1000);
+                }
+                else if(choice == "Ember")
+                {
+                    pcHp -= playerAttack2;
+                    Console.WriteLine("You hit the enemy for " + playerAttack2 + "damage!" + "\n");
+                    Console.WriteLine("The enemy pokemons tottal HP is " + pcHp + "\n");
+                    Console.WriteLine("...");
+                    Thread.Sleep(1000);
                 }
                 else
                 {
                     playerHp += healAmount;
                     Console.WriteLine("You healed for" + healAmount + "HP!");
                     Console.WriteLine("Your tottal HP is " + playerHp + "\n");
+                    Console.WriteLine("...");
+                    Thread.Sleep(1000);
                 }
                 
                 //enemy turn 
@@ -46,6 +61,7 @@ namespace Turn_based_combat
                 if (pcHp > 0)
                    
                 Console.WriteLine("--Enemy turn--");
+                Thread.Sleep(1000);
                 {
                     Console.WriteLine("it's the enemys turn ");
                     int pcChoice = random.Next(0,2);
